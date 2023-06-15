@@ -13,4 +13,13 @@
         android:padding="16dp"
         android:textIsSelectable="true"
         tools:context="com.sgnl.signalfirewatch.ItemDetailFragment" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

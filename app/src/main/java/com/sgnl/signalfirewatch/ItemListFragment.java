@@ -1,5 +1,6 @@
 package com.sgnl.signalfirewatch;
 
+import android.accounts.AccountManager;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.os.Build;
@@ -40,6 +41,10 @@ public class ItemListFragment extends Fragment {
      * Currently provides a toast when Ctrl + Z and Ctrl + F
      * are triggered
      */
+
+    AccountManager am = AccountManager.get(this.getContext());
+    Bundle options = new Bundle();
+
     ViewCompat.OnUnhandledKeyEventListenerCompat unhandledKeyEventListenerCompat = (v, event) -> {
         if (event.getKeyCode() == KeyEvent.KEYCODE_Z && event.isCtrlPressed()) {
             Toast.makeText(
@@ -66,7 +71,13 @@ public class ItemListFragment extends Fragment {
 
         binding = FragmentItemListBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
+        am.getAuthToken(
+                myAccount_,                     // Account retrieved using getAccountsByType()
+                "Manage your tasks",            // Auth scope
+                options,                        // Authenticator-specific options
+                this,                           // Your activity
+                new OnTokenAcquired(),          // Callback called when a token is successfully acquired
+                new Handler(new OnError()));    // Callback called if an error occurs
     }
 
     @Override
